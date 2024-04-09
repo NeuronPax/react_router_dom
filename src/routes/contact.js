@@ -1,22 +1,37 @@
 import {Form} from 'react-router-dom'
 import avatar from '../assets/avatar.jpg'
 
+const Favorite = ({favorite}) => {
+  return (
+    <Form method='post'>
+      <button
+        className={`shadow-none hover:shadow-none ${favorite ? 'text-amber-500' : 'text-gray-400 hover:text-amber-500'}`}
+        name='favorite'
+        value={favorite ? 'false' : 'true'}
+        aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}>
+          {favorite ? '★' : '☆'}
+      </button>
+    </Form>
+  )
+}
+
 const Contact = () => {
   const contact = {
     first: 'Your',
     last: 'Name',
-    avatar: avatar,
-    twitter: 'your_handle',
-    notes: 'Some notes',
+    avatar,
     favorite: true
   }
   return (
-    <div id='contact'>
+    <div id='contact' className='flex'>
       <div>
-        <img key={contact.avatar} src={contact.avatar || null} />
+        <img
+          className='rounded-3xl bg-gray-300 w-48 h-48 mr-8'
+          src={contact.avatar || null}
+          alt='' />
       </div>
       <div>
-        <h1>
+        <h1 className='flex items-center gap-4 text-4xl font-bold'>
           {contact.first || contact.last ? (
             <>
               {contact.first} {contact.last}
@@ -24,18 +39,9 @@ const Contact = () => {
           ) : (
             <i>No Name</i>
           )}
-          {' '}
-          <Favorite contact={contact} />
+          <Favorite favorite={contact.favorite} />
         </h1>
-        {contact.twitter && (
-          <p>
-            <a target='_blank' href={`https://twitter.com/${contact.twitter}`}>
-              {contact.twitter}
-            </a>
-          </p>
-        )}
-        {contact.notes && <p>{contact.notes}</p>}
-        <div>
+        <div className='flex gap-2 my-4'>
           <Form action='edit'>
             <button type='submit'>Edit</button>
           </Form>
@@ -47,25 +53,11 @@ const Contact = () => {
                 e.preventDefault()
               }
             }}>
-              <button type='submit'>Delete</button>
+              <button className='text-red-500' type='submit'>Delete</button>
           </Form>
         </div>
       </div>
     </div>
-  )
-}
-
-const Favorite = ({contact}) => {
-  let favorite = contact.favorite
-  return (
-    <Form method='post'>
-      <button
-        name='favorite'
-        value={favorite ? 'false' : 'true'}
-        aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}>
-          {favorite ? '★' : '☆'}
-      </button>
-    </Form>
   )
 }
 
