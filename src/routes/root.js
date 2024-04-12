@@ -1,23 +1,24 @@
+import {useEffect, useState} from 'react'
 import {Outlet, Link} from 'react-router-dom'
+import {useSearchUsersQuery} from '../store/github/githubapi'
+import {useDebounce} from '../hooks/debounce'
 
 const Root = () => {
+	const [search, setSearch] = useState('')
+	const debounced = useDebounce(search)
+	const {data, isLoading} = useSearchUsersQuery('vladilen')
+	useEffect(() => console.log(debounced), [debounced])
 	return (
 		<div className='flex h-screen'>
 			<div id='sidebar' className='flex flex-col bg-gray-100 border-r-2 w-96'>
-				<div className='flex border-b-2 gap-2 py-4 px-8'>
-					<form id='search-form' className='flex-1' role='search'>
-						<input
-							id='q'
-							className='w-full'
-							aria-label='Search contacts'
-							placeholder='Search'
-							type='search'
-							name='q'
-						/>
-					</form>
-					<form method='post'>
-						<button type='submit'>New</button>
-					</form>
+				<div className='border-b-2 py-4 px-8'>
+					<input
+						className='w-full'
+						type='search'
+						placeholder='Search for Github username'
+						value={search}
+						onChange={e => setSearch(e.target.value)}
+					/>
 				</div>
 				<nav className='flex-1 py-4 px-8'>
 					<ul>
