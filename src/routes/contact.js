@@ -60,9 +60,7 @@ const Contact = () => {
 								e.preventDefault()
 							}
 						}}>
-						<button className='text-red-500' type='submit'>
-							Delete
-						</button>
+              <button className='text-red-500' type='submit'>Delete</button>
 					</Form>
 				</div>
 			</div>

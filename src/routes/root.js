@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {Outlet, Link} from 'react-router-dom'
 import {useSearchUsersQuery} from '../store/github/githubapi'
 import {useDebounce} from '../hooks/debounce'
@@ -6,8 +6,9 @@ import {useDebounce} from '../hooks/debounce'
 const Root = () => {
 	const [search, setSearch] = useState('')
 	const debounced = useDebounce(search)
-	const {data, isLoading} = useSearchUsersQuery('vladilen')
-	useEffect(() => console.log(debounced), [debounced])
+	const {data} = useSearchUsersQuery(debounced, {
+    skip: debounced.length < 3
+  })
 	return (
 		<div className='flex h-screen'>
 			<div id='sidebar' className='flex flex-col bg-gray-100 border-r-2 w-96'>
@@ -22,20 +23,15 @@ const Root = () => {
 				</div>
 				<nav className='flex-1 py-4 px-8'>
 					<ul>
-						<li>
-							<Link
-								to={`/contacts/1`}
-								className='flex rounded-lg my-1 p-2 hover:bg-gray-200'>
-								Your Name
-							</Link>
-						</li>
-						<li>
-							<Link
-								to={`/contacts/2`}
-								className='flex rounded-lg p-2 hover:bg-gray-200'>
-								Your Friend
-							</Link>
-						</li>
+            {data?.map(({id, login}) => (
+              <li key={id}>
+                <Link
+                  to={`/contacts/1`}
+                  className='flex rounded-lg my-1 p-2 hover:bg-gray-200'>
+                    {login}
+                </Link>
+              </li>
+            ))}
 					</ul>
 				</nav>
 				<h1 className='border-t-2 text-center font-medium py-4'>
