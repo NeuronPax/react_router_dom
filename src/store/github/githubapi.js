@@ -13,8 +13,13 @@ export const githubApi = createApi({
 				}
 			}),
 			transformResponse: response => response.items
+		}),
+		getUser: builder.query({
+			query: user => ({
+				url: `users/${user}`
+			})
 		})
 	})
 })
 
-export const {useSearchUsersQuery} = githubApi
+export const {useSearchUsersQuery, useGetUserQuery} = githubApi

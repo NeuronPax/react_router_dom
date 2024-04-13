@@ -1,8 +1,8 @@
 import {createRoot} from 'react-dom/client'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import Root from './routes/root'
+import Layout from './components/layout'
 import ErrorPage from './error-page'
-import Contact from './routes/contact'
+import GitUser from './components/gituser'
 import {Provider} from 'react-redux'
 import {store} from './store'
 
@@ -11,12 +11,12 @@ import './index.css'
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Root />,
+		element: <Layout />,
 		errorElement: <ErrorPage />,
 		children: [
 			{
-				path: 'contacts/:contactId',
-				element: <Contact />
+				path: 'users/:userLogin',
+				element: <GitUser />
 			}
 		]
 	}

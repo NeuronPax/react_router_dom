@@ -1,5 +1,5 @@
-import {Form} from 'react-router-dom'
-import avatar from '../assets/avatar.jpg'
+import {useGetUserQuery} from '../store/github/githubapi'
+import {Form, useParams} from 'react-router-dom'
 
 const Favorite = ({favorite}) => {
 	return (
@@ -17,33 +17,43 @@ const Favorite = ({favorite}) => {
 	)
 }
 
-const Contact = () => {
+const GitUser = () => {
 	const contact = {
 		first: 'Your',
 		last: 'Name',
-		avatar,
 		favorite: true
 	}
+	const {userLogin} = useParams()
+	const {data, isLoading} = useGetUserQuery(userLogin)
+	if (isLoading) return
 	return (
 		<div id='contact' className='flex'>
 			<div>
 				<img
 					className='rounded-3xl bg-gray-300 w-48 h-48 mr-8'
-					src={contact.avatar || null}
+					src={data.avatar_url || null}
 					alt=''
 				/>
 			</div>
 			<div>
-				<h1 className='flex items-center gap-4 text-4xl font-bold'>
-					{contact.first || contact.last ? (
-						<>
-							{contact.first} {contact.last}
-						</>
-					) : (
-						<i>No Name</i>
-					)}
+				<h1 className='flex gap-4 text-4xl font-bold mb-4'>
+					<div className='flex flex-col gap-4'>
+						<span>
+							Login: <u>{data.login}</u>
+						</span>
+						{data.name ? (
+							<span>
+								Name: <u>{data.name}</u>
+							</span>
+						) : (
+							<i>No Name</i>
+						)}
+					</div>
 					<Favorite favorite={contact.favorite} />
 				</h1>
+				<a href={data.html_url} target='_blank' className='text-blue-700'>
+					{data.html_url}
+				</a>
 				<div className='flex gap-2 my-4'>
 					<Form action='edit'>
 						<button type='submit'>Edit</button>
@@ -60,7 +70,9 @@ const Contact = () => {
 								e.preventDefault()
 							}
 						}}>
-              <button className='text-red-500' type='submit'>Delete</button>
+						<button className='text-red-500' type='submit'>
+							Delete
+						</button>
 					</Form>
 				</div>
 			</div>
@@ -68,4 +80,4 @@ const Contact = () => {
 	)
 }
 
-export default Contact
+export default GitUser
