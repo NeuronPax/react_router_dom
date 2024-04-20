@@ -27,7 +27,7 @@ const GitUser = () => {
 	const {data, isLoading} = useGetUserQuery(userLogin)
 	if (isLoading) return
 	return (
-		<div id='contact' className='flex'>
+		<div className='flex'>
 			<div>
 				<img
 					className='rounded-3xl bg-gray-300 w-48 h-48 mr-8'
