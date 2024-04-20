@@ -1,8 +1,8 @@
 import {createRoot} from 'react-dom/client'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import Layout from './components/layout'
+import Layout from './pages/layout'
 import ErrorPage from './error-page'
-import GitUser from './components/gituser'
+import GitUser from './pages/gituser'
 import {Provider} from 'react-redux'
 import {store} from './store'
 
