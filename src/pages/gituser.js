@@ -1,6 +1,6 @@
 import {useGetUserQuery} from '../store/github/githubapi'
 import {useParams} from 'react-router-dom'
-import Favorite from '../components/favorite'
+import GitUserData from '../components/gituser-data'
 
 const GitUser = () => {
 	const {userLogin} = useParams()
@@ -14,43 +14,7 @@ const GitUser = () => {
 				alt=''
 			/>
 			<div>
-				<div className='rounded-lg bg-gray-100 p-2'>
-					<table className='text-gray-700 w-full'>
-						<tbody>
-							<tr>
-								<td className='border border-2 border-white text-right p-2'>
-									Login:
-								</td>
-								<th className='border border-2 border-white text-left w-96 p-2'>
-									{data.login}
-									<Favorite favorite={true} />
-								</th>
-							</tr>
-							<tr>
-								<td className='border border-2 border-white text-right p-2'>
-									Name:
-								</td>
-								<th className='border border-2 border-white text-left w-96 p-2'>
-									{data.name ? <>{data.name}</> : <i>No Name</i>}
-								</th>
-							</tr>
-							<tr>
-								<td className='border border-2 border-white text-right p-2'>
-									Account URL:
-								</td>
-								<th className='border border-2 border-white text-left w-96 p-2'>
-									<a
-										href={data.html_url}
-										target='_blank'
-										rel='noreferrer noopener'
-										className='text-blue-700 italic'>
-										{data.html_url}
-									</a>
-								</th>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<GitUserData data={data} />
 				<div className='flex gap-2 border-t-2 my-4 pt-4'>
 					<button>Edit</button>
 					<button className='text-red-500'>Delete</button>
