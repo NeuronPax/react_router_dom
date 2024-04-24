@@ -4,7 +4,7 @@ const ErrorPage = () => {
 	const error = useRouteError()
 	console.error(error)
 	return (
-		<div className='flex flex-col gap-2 justify-center items-center'>
+		<div className='flex flex-col gap-2 justify-center items-center pt-32'>
 			<h1 className='font-bold'>Oops!</h1>
 			<p>Sorry, an unexpected error has occurred.</p>
 			<p>

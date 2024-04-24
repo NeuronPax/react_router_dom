@@ -11,7 +11,7 @@ const Layout = () => {
 	return (
 		<div className='flex min-h-screen'>
 			<div className='flex flex-col bg-gray-100 border-r-2 w-96'>
-				<div className='border-b-2 py-4 px-4'>
+				<div className='py-4 px-4'>
 					<input
 						className='w-full'
 						type='search'

@@ -4,7 +4,8 @@ import GitUserData from '../components/gituser-data'
 
 const GitUser = () => {
 	const {userLogin} = useParams()
-	const {data, isLoading} = useGetUserQuery(userLogin)
+	const {data, isLoading, isError} = useGetUserQuery(userLogin)
+  if (isError) throw new Response("", {status: 404, statusText: "Not Found"})
 	if (isLoading) return
 	return (
 		<div className='flex'>

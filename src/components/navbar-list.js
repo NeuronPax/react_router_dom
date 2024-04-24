@@ -6,7 +6,7 @@ const NavBarList = ({debounced}) => {
 		skip: debounced.length < 3
 	})
 	return (
-    <nav className='flex-1 py-2 px-4'>
+    <nav className='flex-1 border-y-2 py-2 px-4'>
       <ul className='divide-y divide-gray-200'>
         {debounced.length > 2 &&
           data?.map(({id, login, avatar_url, html_url}) => (
