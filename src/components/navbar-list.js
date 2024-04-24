@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {useSearchUsersQuery} from '../store/github/githubapi'
 
 const NavBarList = ({debounced}) => {
@@ -11,9 +11,9 @@ const NavBarList = ({debounced}) => {
         {debounced.length > 2 &&
           data?.map(({id, login, avatar_url, html_url}) => (
             <li key={id} className='py-1'>
-              <Link
+              <NavLink
                 to={`/users/${login}`}
-                className='flex rounded-md p-2 hover:bg-gray-200'>
+                className={({isActive}) => `flex rounded-md p-2 hover:bg-gray-200 ${isActive && 'bg-gray-300'}`}>
                 <img
                   className='h-10 w-10 rounded-full'
                   src={avatar_url || null}
@@ -23,7 +23,7 @@ const NavBarList = ({debounced}) => {
                   <p className='font-medium text-gray-900'>{login}</p>
                   <p className='text-sm text-gray-500'>{html_url}</p>
                 </div>
-              </Link>
+              </NavLink>
             </li>
           ))}
       </ul>

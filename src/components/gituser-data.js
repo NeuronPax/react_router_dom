@@ -18,8 +18,8 @@ const dateOption = {
 }
 
 const GitUserData = ({data}) => (
-  <div className='rounded-lg bg-gray-100 p-2'>
-    <table className='text-gray-700 w-full'>
+  <div className='rounded-lg bg-gray-100 shadow-md p-2'>
+    <table className='shadow-md text-gray-700 w-full'>
       <caption className="flex items-center caption-top font-bold pl-2">
         <u>Favorite:</u>
         <Favorite favorite={true} />

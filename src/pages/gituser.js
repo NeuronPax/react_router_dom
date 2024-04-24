@@ -9,7 +9,7 @@ const GitUser = () => {
 	return (
 		<div className='flex'>
 			<img
-				className='rounded-3xl bg-gray-300 w-48 h-48 mr-8'
+				className='rounded-3xl bg-gray-300 shadow-md w-48 h-48 mr-8'
 				src={data.avatar_url || null}
 				alt=''
 			/>
